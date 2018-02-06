@@ -15,10 +15,13 @@ function initServer(serverPort, initedCallback) {
   // 静态页面
   // 这里一般设置你的静态资源路径
   if (IS_DEV) {
-    app.use(proxy('/', {target: 'http://127.0.0.1:3301'}));
+    app.use(proxy('/static', {target: 'http://127.0.0.1:3301'}));
   } else {
-    app.use('/', express.static('src'));
+    app.use('/static', express.static('src'));
   }
+
+  app.use('/api/btwhat/list', require('./server/router/btwhat/list'));
+  app.use('/api/btwhat/detail', require('./server/router/btwhat/detail'));
 
   // 监听端口
   app.listen(app.get('port'), () => {
