@@ -15,9 +15,9 @@ function initServer(serverPort, initedCallback) {
   // 静态页面
   // 这里一般设置你的静态资源路径
   if (IS_DEV) {
-    app.use(proxy('/static', {target: 'http://127.0.0.1:3301'}));
+    app.use(proxy(['/**', '!/api/**'], {target: 'http://127.0.0.1:3301', ws: true}));
   } else {
-    app.use('/static', express.static('src'));
+    app.use('/', express.static('build'));
   }
 
   // BT Book

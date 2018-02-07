@@ -16,10 +16,10 @@ function createWindow() {
   IS_DEV && installExtensions();
 
   // 创建浏览器窗口。
-  win = new BrowserWindow({width: 1366, height: 768});
+  win = new BrowserWindow({width: 1366, height: 768, titleBarStyle: 'hidden'});
 
   // 然后加载应用的 index.html。
-  win.loadURL(`http://localhost:${SERVER_PORT}/static`);
+  win.loadURL(`http://localhost:${SERVER_PORT}`);
 
   // 打开开发者工具。
   win.webContents.openDevTools();

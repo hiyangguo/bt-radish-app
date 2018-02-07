@@ -1,0 +1,70 @@
+body {
+  font-family: "Microsoft YaHei", "Hiragino Sans GB", STXihei, "Open Sans", sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+:focus {
+  outline: none;
+}
+.home .bg {
+  background-image: url("http://api.dujin.org/bing/1920.php");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+.home .bg::before {
+  content: "";
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .3s linear;
+}
+.searching.home .bg::before {
+  opacity: .55;
+}
+.home .content {
+  position: relative;
+  z-index: 2;
+}
+.home .search-bar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.search-bar {
+  width: 548px;
+  height: 50px;
+  background-color: white;
+}
+.search-input {
+  background-color: #fff;
+  margin: 10px 1px 0 10px;
+  width: 486px;
+  border-right: 0;
+  padding-right: 4px;
+  border: none;
+  height: 30px;
+  font-size: 16px;
+}
+.search-button {
+  width: 45px;
+  height: 45px;
+  text-indent: -100px;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: white;
+}
