@@ -22,11 +22,11 @@ function initServer(serverPort, initedCallback) {
 
   // BT Book
   app.use('/api/btwhat/list', require('./server/router/btwhat/list'));
-  app.use('/api/btwhat/detail', require('./server/router/btwhat/detail'));
+  app.use('/api/btwhat/detail/:hash', require('./server/router/btwhat/detail'));
 
   // 屌丝搜
   app.use('/api/diaosiso/list', require('./server/router/diaosiso/list'));
-  app.use('/api/diaosiso/detail', require('./server/router/diaosiso/detail'));
+  app.use('/api/diaosiso/detail/:hash', require('./server/router/diaosiso/detail'));
 
 
   // 监听端口

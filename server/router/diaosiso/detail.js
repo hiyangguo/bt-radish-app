@@ -1,6 +1,7 @@
 const express = require('express');
 const $ = require('cheerio');
 const _ = require('lodash');
+const {basename} = require('path');
 const {createRequest} = require('../../util');
 
 const router = express();
@@ -25,7 +26,7 @@ const parsingHtmlToFileData = (i, li) => {
 };
 
 router.get('/', (req, res) => {
-  const hash = _.get(req, 'query.hash');
+  const hash = basename(req.baseUrl);
   (async function () {
     try {
       const response = await createRequest('www.diaosisou.org', `/torrent/${hash}`);
