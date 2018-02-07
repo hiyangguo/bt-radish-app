@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
       const response = await createRequest('www.diaosisou.org', `/torrent/${hash}`);
       const {data: body} = response;
       const $body = $.load(body);
-      const $main = $body('#main');
       const title = $body('.T2').text();
       const $bootInfoPs = $body('.BotInfo p');
       // indexTime 索引日期
