@@ -1,7 +1,7 @@
 const express = require('express');
 const $ = require('cheerio');
 const _ = require('lodash');
-const {createRequest, evalScript} = require('../../util');
+const {createRequest} = require('../../util');
 
 const router = express();
 
@@ -14,8 +14,10 @@ const router = express();
  */
 const parsingHtmlToFileData = (i, li) => {
   const $li = $(li);
-  const size = $li.find('.cpill').text();
-  const fileName = $.load(evalScript($li.find('script').html())).text();
+  const size = $li.find('span').text();
+  // 读取 size 信息后 移除
+  $li.find('span').remove();
+  const fileName = $li.text();
   return {
     fileName,
     size
@@ -26,19 +28,19 @@ router.get('/', (req, res) => {
   const hash = _.get(req, 'query.hash');
   (async function () {
     try {
-      const response = await createRequest('www.btwhat.info', `/wiki/${hash}.html`);
+      const response = await createRequest('www.diaosisou.org', `/torrent/${hash}`);
       const {data: body} = response;
       const $body = $.load(body);
-      const $wall = $body('#wall');
-      const title = evalScript($wall.find('h2 script').html());
-      const $tds = $wall.find('.detail-table tr:nth-child(2) td');
-      const $listLis = $wall.find('.detail-panel ol li');
-      const [fileType, createTime, hot, fileSize, fileCount] = Array.from($tds.map((i, item) => _.trim($(item).text())));
+      const $main = $body('#main');
+      const title = $body('.T2').text();
+      const $bootInfoPs = $body('.BotInfo p');
+      // indexTime 索引日期
+      const [fileSize, fileCount, createTime, indexTime, hot] = _.take(Array.from($bootInfoPs.map((i, p) => _.trim($(p).text()))), 5).map(text => /\：(.*)/.exec(text)[1]);
+      const $listLis = $body('.flist li');
       const files = Array.from($listLis.map(parsingHtmlToFileData));
       res.json({
         hash,
         title,
-        fileType,
         createTime,
         hot,
         fileSize,

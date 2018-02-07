@@ -20,8 +20,14 @@ function initServer(serverPort, initedCallback) {
     app.use('/static', express.static('src'));
   }
 
+  // BT Book
   app.use('/api/btwhat/list', require('./server/router/btwhat/list'));
   app.use('/api/btwhat/detail', require('./server/router/btwhat/detail'));
+
+  // 屌丝搜
+  app.use('/api/diaosiso/list', require('./server/router/diaosiso/list'));
+  app.use('/api/diaosiso/detail', require('./server/router/diaosiso/detail'));
+
 
   // 监听端口
   app.listen(app.get('port'), () => {
@@ -36,7 +42,7 @@ function checkDevServer() {
     try {
       const inUse = await check(3301, '127.0.0.1');
       if (!inUse) {
-        throw new Error('Dev server is not started');
+        throw new Error('Dev server is not started , please run `npm run start-view` in your terminal');
       }
     } catch (e) {
       console.warn(e.message);
