@@ -1,14 +1,41 @@
-body {
-  font-family: "Microsoft YaHei", "Hiragino Sans GB", STXihei, "Open Sans", sans-serif;
+@import "variables.less";
+@import "resets.less";
+@import "home.less";
+
+.center-block {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+// Search Input
+// ================
+.search-bar {
+  width: 548px;
+  height: 50px;
+  background-color: white;
 }
 
-:focus {
-  outline: none;
+.search-input {
+  background-color: #fff;
+  margin: 10px 1px 0 10px;
+  width: ~"calc(100% - 60px)";
+  border-right: 0;
+  padding-right: 4px;
+  border: none;
+  height: 30px;
+  font-size: 16px;
 }
 
-@import "home";
+.search-button {
+  width: 45px;
+  height: 45px;
+  text-indent: -100px;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: white;
+}

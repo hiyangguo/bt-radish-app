@@ -1,28 +1,29 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {action, extendObservable} from 'mobx';
+import {action, observable} from 'mobx';
 import {observer} from 'mobx-react';
 import classnames from 'classnames';
+
+import SearchInput from './common/SearchInput';
 
 const contextTypes = {
   router: PropTypes.object
 };
 
-
+@observer
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    extendObservable(this, {
-      searching: false,
-      setSearching: action(function (searching) {
-        this.searching = searching;
-      }),
-      searchWord: '',
-      setSearchWord: action(function (word) {
-        this.searchWord = word;
-      })
-    });
-  }
+  @observable searching = false;
+  @observable searchWord = '';
+
+  @action
+  setSearching = (searching) => {
+    this.searching = searching;
+  };
+
+  @action
+  setSearchWord = (word) => {
+    this.searchWord = word;
+  };
 
   handleSearchInputFocus = () => this.setSearching(true);
   handleSearchInputBlur = () => this.setSearching(false);
@@ -37,31 +38,22 @@ class Home extends Component {
 
   render() {
     return (
-      <div className={classnames('home', {
-        searching: this.searching
-      })}>
+      <div className={
+        classnames('home', {
+          searching: this.searching
+        })
+      }>
         <div className="bg"></div>
         <div className="content">
-          <div className="search-bar">
-            <input
-              className="search-input"
-              type="text"
-              value={this.searchWord}
-              placeholder="输入关键字进行搜索"
-              onFocus={this.handleSearchInputFocus}
-              onBlur={this.handleSearchInputBlur}
-              onChange={this.handleSearchInputChange}
-            />
-            <button
-              className="search-button"
-              style={{
-                backgroundImage: `url("${process.env.PUBLIC_URL}/img/cn_searchbt_hp.png")`
-              }}
-              onClick={this.handleSearchButtonClick}
-            >
-              搜索
-            </button>
-          </div>
+          <SearchInput
+            wrapClassName="center-block"
+            value={this.searchWord}
+            onFocus={this.handleSearchInputFocus}
+            onBlur={this.handleSearchInputBlur}
+            onChange={this.handleSearchInputChange}
+            placeholder="输入关键字进行搜索"
+            onSearchButtonClick={this.handleSearchButtonClick}
+          />
         </div>
       </div>
     );
@@ -70,4 +62,4 @@ class Home extends Component {
 
 Home.contextTypes = contextTypes;
 
-export default observer(Home);
+export default Home;

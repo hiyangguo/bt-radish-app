@@ -5,9 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
-    "start-server": "node run.js",
-    "start-view": "PORT=3301 react-scripts start",
-    "build-view": "react-scripts build",
+    "start-server": "NODE_ENV=development node run.js",
+    "start-view": "PORT=3301 react-app-rewired start",
+    "build-view": "react-app-rewired build",
     "watch-css": "node node_modules/less-watch-compiler/dist/less-watch-compiler.js src/less src index.less",
     "eject": "react-scripts eject"
   },
@@ -36,11 +36,13 @@
     "classnames": "^2.2.5",
     "electron-devtools-installer": "^2.2.3",
     "less": "^3.0.0-alpha.3",
-    "less-watch-compiler": "^1.11.0",
     "lodash": "^4.17.5",
     "mobx": "^3.5.1",
     "mobx-react": "^4.4.1",
     "prop-types": "^15.6.0",
+    "react-app-rewire-less": "^2.1.0",
+    "react-app-rewire-mobx": "^1.0.7",
+    "react-app-rewired": "^1.4.1",
     "react-router-dom": "^4.2.2",
     "tcp-port-used": "^0.1.2"
   }

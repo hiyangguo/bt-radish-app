@@ -7,7 +7,6 @@ const {IS_DEV} = require('./server/constants');
 
 function initServer(serverPort, initedCallback) {
   const app = express();
-  // const {PORT = '3300'} = process.env;
 
   // 设置端口
   app.set('port', serverPort);
@@ -19,6 +18,9 @@ function initServer(serverPort, initedCallback) {
   } else {
     app.use('/', express.static('build'));
   }
+
+  // Background
+  app.use('/api/bg', require('./server/router/bg'));
 
   // BT Book
   app.use('/api/btwhat/list', require('./server/router/btwhat/list'));

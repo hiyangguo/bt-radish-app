@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 // import {action, extendObservable} from 'mobx';
-import {observer} from 'mobx-react';
+// import {observer} from 'mobx-react';
 
+// @observer
 class List extends Component {
   render() {
     return (
@@ -12,4 +13,4 @@ class List extends Component {
   }
 }
 
-export default observer(List);
+export default List;

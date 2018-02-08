@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -13,9 +14,12 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Home}/>
-          <Route path="/list/:engine/:word" component={List}/>
-          <Route component={Error}/>
+          {/** <Switch/> 展示第一个匹配 ， 没有匹配的 <Route/> 总是匹配 **/}
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/list/:engine/:word" component={List}/>
+            <Route component={Error}/>
+          </Switch>
         </div>
       </Router>
     );

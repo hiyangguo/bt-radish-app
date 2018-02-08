@@ -28,7 +28,7 @@ function randomUserAgent() {
   return userAgentList[num];
 }
 
-async function createRequest(host, path, method = 'get') {
+async function createRequest(host, path, method = 'get', option = {}) {
   try {
     const options = {
       url: `http://${host}${path}`,
