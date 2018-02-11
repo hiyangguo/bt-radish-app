@@ -10,6 +10,7 @@ import {SUPPORT_WEBS} from '../../constants';
 import {action} from 'mobx/lib/mobx';
 
 const propTypes = {
+  activeWeb: PropTypes.string,
   className: PropTypes.string,
   wrapClassName: PropTypes.string,
   onSearchButtonClick: PropTypes.func.isRequired
@@ -21,7 +22,7 @@ const defaultProps = {
 
 @observer
 class SearchInput extends Component {
-  @observable activeWeb = Object.keys(SUPPORT_WEBS)[0];
+  @observable activeWeb = this.props.activeWeb || Object.keys(SUPPORT_WEBS)[0];
   @observable dropDownOpen = false;
 
   @computed get activeWebValue() {
@@ -52,6 +53,10 @@ class SearchInput extends Component {
   handleDropdownItemClick = (key) => {
     this.setActiveWeb(key);
     this.setDropDownOpen(false);
+  };
+
+  handleSearchButtonClick = (e) => {
+    this.props.onSearchButtonClick(this.inputValue, e);
   };
 
   renderWebItem = ([key, info]) => {
@@ -86,7 +91,7 @@ class SearchInput extends Component {
           style={{
             backgroundImage: `url("${process.env.PUBLIC_URL}/img/cn_searchbt_hp.png")`
           }}
-          onClick={(e) => this.props.onSearchButtonClick(this.inputValue, e)}
+          onClick={this.handleSearchButtonClick}
         >
           搜索
         </button>
