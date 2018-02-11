@@ -1,4 +1,5 @@
 @import "variables.less";
+@import "mixins.less";
 @import "resets.less";
 @import "home.less";
 
@@ -17,12 +18,19 @@
   width: 548px;
   height: 50px;
   background-color: white;
+  border-radius: @search-input-border-radius;
+
+  .clearfix;
+
+  > * {
+    float: left;
+  }
 }
 
 .search-input {
   background-color: #fff;
   margin: 10px 1px 0 10px;
-  width: ~"calc(100% - 60px)";
+  width: ~"calc(100% - 125px)";
   border-right: 0;
   padding-right: 4px;
   border: none;
@@ -38,4 +46,70 @@
   overflow: hidden;
   cursor: pointer;
   background-color: white;
+  margin-top: 5px;
+}
+
+.search-drop-down {
+  position: relative;
+  display: inline-block;
+
+  &-button {
+    border: none;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: white;
+    padding-right: 10px;
+    position: relative;
+    padding: 10px 20px 10px 10px;
+    height: 50px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: @search-input-border-radius;
+
+    > img {
+      width: 30px;
+      height: 30px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 10px solid #d6d6d6;
+      top: 20px;
+      margin-left: 10px;
+    }
+  }
+
+  &-panel {
+    position: absolute;
+    list-style: none;
+    margin-top: 6px;
+    display: none;
+
+    .open & {
+      display: block;
+    }
+
+    > li {
+      padding: 5px 20px;
+      background-color: rgba(255, 255, 255, .7);
+      width: 100%;
+      font-size: 17px;
+      height: 34px;
+      line-height: 28px;
+      cursor: pointer;
+
+      &:first-child {
+        border-radius: @search-input-border-radius @search-input-border-radius 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 @search-input-border-radius @search-input-border-radius;
+      }
+    }
+  }
 }

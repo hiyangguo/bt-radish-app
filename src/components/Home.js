@@ -32,8 +32,13 @@ class Home extends Component {
     this.setSearchWord(e.target.value);
   };
 
-  handleSearchButtonClick = () => {
-    this.context.router.history.push(`/list/btwhat/${this.searchWord}`);
+  handleSearchButtonClick = (value, e) => {
+    console.log(value, e);
+    const {activeWeb: webPath, value: searchWord} = value;
+    if (searchWord || searchWord.length) {
+
+    }
+    this.context.router.history.push(`/list/${webPath}/${searchWord}`);
   };
 
   render() {
@@ -46,7 +51,7 @@ class Home extends Component {
         <div className="bg"></div>
         <div className="content">
           <SearchInput
-            wrapClassName="center-block"
+            wrapClassName="home-search"
             value={this.searchWord}
             onFocus={this.handleSearchInputFocus}
             onBlur={this.handleSearchInputBlur}
