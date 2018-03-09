@@ -8,7 +8,7 @@ import './less/index.less';
 function loadResource() {
   return new Promise((resolve) => {
     const img = new Image();
-    img.src = '/api/bg';
+    img.src = 'http://api.dujin.org/bing/1920.php';
     img.onload = () => {
       resolve();
     };

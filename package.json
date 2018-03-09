@@ -5,8 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
-    "start-server": "NODE_ENV=development node run.js",
-    "start-view": "PORT=3301 react-app-rewired start",
+    "start-dev": "PORT=3301 react-app-rewired start",
     "build-view": "react-app-rewired build",
     "watch-css": "node node_modules/less-watch-compiler/dist/less-watch-compiler.js src/less src index.less",
     "eject": "react-scripts eject"
@@ -48,5 +47,6 @@
     "rsuite-clipboard": "^2.0.1",
     "rsuite-notification": "^3.0.0-next.2",
     "tcp-port-used": "^0.1.2"
-  }
+  },
+  "homepage": "./"
 }

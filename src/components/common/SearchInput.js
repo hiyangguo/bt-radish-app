@@ -13,7 +13,8 @@ const propTypes = {
   activeWeb: PropTypes.string,
   className: PropTypes.string,
   wrapClassName: PropTypes.string,
-  onSearchButtonClick: PropTypes.func.isRequired
+  onSearchButtonClick: PropTypes.func.isRequired,
+  onMenuItemChange: PropTypes.func
 };
 
 const defaultProps = {
@@ -51,8 +52,10 @@ class SearchInput extends Component {
   };
 
   handleDropdownItemClick = (key) => {
+    const {onMenuItemChange} = this.props;
     this.setActiveWeb(key);
     this.setDropDownOpen(false);
+    onMenuItemChange && onMenuItemChange(key);
   };
 
   handleSearchButtonClick = (e) => {

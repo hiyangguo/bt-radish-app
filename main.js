@@ -1,11 +1,10 @@
 const {app, BrowserWindow} = require('electron');
 const devtron = require('devtron');
 const path = require('path');
-const {checkDevServer, initServer} = require('./server');
+const url = require('url');
 
-const {IS_DEV} = require('./server/constants');
-
-const {SERVER_PORT = '3300'} = process.env;
+const {SERVER_PORT = '3301'} = process.env;
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -27,9 +26,14 @@ function createWindow() {
     }
   });
 
-  // 然后加载应用的 index.html。
-  win.loadURL(`http://localhost:${SERVER_PORT}`);
-
+  // 加载应用
+  const staticIndexPath = path.join(`${__dirname}`, './build/index.html');
+  const main = IS_DEV ? `http://localhost:${SERVER_PORT}` : url.format({
+    pathname: staticIndexPath,
+    protocol: 'file:',
+    slashes: true
+  });
+  win.loadURL(main);
   // 打开开发者工具。
   win.webContents.openDevTools();
 
@@ -51,8 +55,6 @@ function installExtensions() {
 // 创建浏览器窗口时，调用这个函数。
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', async function () {
-  IS_DEV && checkDevServer();
-  await initServer(SERVER_PORT);
   createWindow();
 });
 

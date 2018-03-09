@@ -9,7 +9,8 @@ import SearchInput from './common/SearchInput';
 import {Link} from 'react-router-dom';
 import {getData} from '../utils/request';
 import {ResponseStatus} from '../constants';
-import config from '../parser';
+import config from '../engine';
+import Loader from './common/Loader';
 
 
 const contextTypes = {
@@ -27,7 +28,7 @@ const LabelText = ({label, text, ...props}) => (
 @observer
 class List extends Component {
   @observable searchParams = {
-    ..._.pick(_.get(this.props, 'match.params'), ['engine', 'word']),
+    ...this.getBasicInfo(),
     query: this.getQuery()
   };
   @observable result = {};
@@ -51,7 +52,7 @@ class List extends Component {
     const pathName = this.getLocation(this.props);
     if (nextPathName !== pathName) {
       this.setSearchParams({
-        ...this.searchParams,
+        ...this.getBasicInfo(nextProps),
         query: this.getQuery(nextProps)
       });
       this.loadListData();
@@ -64,6 +65,8 @@ class List extends Component {
     const query = _.get(props, 'location.search') || '';
     return query.length > 0 ? query.replace(/^\?query=/, '') : null;
   };
+
+  getBasicInfo = (props = this.props) => _.pick(_.get(props, 'match.params'), ['engine', 'word']);
 
   handleSearchInputChange = (e) => {
     this.setSearchParams({
@@ -84,8 +87,8 @@ class List extends Component {
   loadListData = () => {
     const {engine: engineName, word, query} = this.searchParams;
     const engine = config[engineName];
-    const url = engine.list.getUrl(query || word);
-    const handler = getData(url)(engine.list.parser);
+    const url = engine.getUrl(query || word);
+    const handler = getData(url)(engine.parser);
     handler(this.setResults);
   };
 
@@ -108,7 +111,7 @@ class List extends Component {
             items.map(({hash, title, fileType, createTime, fileSize, fileCount, hot, lastDownload, files}) => (
               <div className="list-wrap" key={hash}>
                 <div className="info-title" title={title}>
-                  <Link to={`/detail/${hash}`}>{title}</Link>
+                  <a>{title}</a>
                 </div>
                 <div className="info-detail">
                   <LabelText label="文件类型" text={fileType}/>
@@ -156,24 +159,12 @@ class List extends Component {
             onChange={this.handleSearchInputChange}
             placeholder="输入关键字进行搜索"
             onSearchButtonClick={this.handleSearchButtonClick}
+            onMenuItemChange={(key) => {
+              this.context.router.history.push(`/list/${key}/${encodeURIComponent(this.searchParams.word)}`);
+            }}
           />
           {
-            status === ResponseStatus.REQUEST && (
-              <div className="sk-fading-circle">
-                <div className="sk-circle1 sk-circle"></div>
-                <div className="sk-circle2 sk-circle"></div>
-                <div className="sk-circle3 sk-circle"></div>
-                <div className="sk-circle4 sk-circle"></div>
-                <div className="sk-circle5 sk-circle"></div>
-                <div className="sk-circle6 sk-circle"></div>
-                <div className="sk-circle7 sk-circle"></div>
-                <div className="sk-circle8 sk-circle"></div>
-                <div className="sk-circle9 sk-circle"></div>
-                <div className="sk-circle10 sk-circle"></div>
-                <div className="sk-circle11 sk-circle"></div>
-                <div className="sk-circle12 sk-circle"></div>
-              </div>
-            )
+            status === ResponseStatus.REQUEST && <Loader/>
           }
 
           {
