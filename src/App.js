@@ -17,7 +17,7 @@ class App extends Component {
           {/** <Switch/> 展示第一个匹配 ， 没有匹配的 <Route/> 总是匹配 **/}
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/list/:engine/:word" component={List}/>
+            <Route exact path="/list/:engine/:word*" component={List}/>
             <Route component={Error}/>
           </Switch>
         </div>

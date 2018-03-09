@@ -1,0 +1,1 @@
+export default script => eval(/document\.write\((.*)\)\;/ig.exec(script)[1]);

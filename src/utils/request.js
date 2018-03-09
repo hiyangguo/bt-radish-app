@@ -1,9 +1,8 @@
 import axios from 'axios';
 import {ResponseStatus} from '../constants';
-import _ from 'lodash';
 
 export function getData(url, params, options = {}) {
-  return (dispatch) => {
+  return (parser) => (dispatch) => {
     (async function () {
       dispatch({
         status: ResponseStatus.REQUEST
@@ -14,12 +13,10 @@ export function getData(url, params, options = {}) {
           url,
           params
         });
-
-        const {status, data} = response;
-
+        const {code, ...data} = parser(response);
         dispatch({
+          status: code === 200000 ? ResponseStatus.SUCCESS : ResponseStatus.ERROR,
           ...data,
-          status: status === 200 ? ResponseStatus.SUCCESS : ResponseStatus.ERROR,
         });
       } catch (e) {
         dispatch({

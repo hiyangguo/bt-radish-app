@@ -45,6 +45,8 @@
     "react-app-rewire-mobx": "^1.0.7",
     "react-app-rewired": "^1.4.1",
     "react-router-dom": "^4.2.2",
+    "rsuite-clipboard": "^2.0.1",
+    "rsuite-notification": "^3.0.0-next.2",
     "tcp-port-used": "^0.1.2"
   }
 }

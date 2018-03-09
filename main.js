@@ -16,7 +16,16 @@ function createWindow() {
   IS_DEV && installExtensions();
 
   // 创建浏览器窗口。
-  win = new BrowserWindow({width: 1366, height: 768, titleBarStyle: 'hidden'});
+  win = new BrowserWindow({
+    width: 1366,
+    height: 768,
+    titleBarStyle: 'hidden',
+    backgroundColor: '#fff',
+    //禁用跨域检查
+    webPreferences: {
+      webSecurity: false
+    }
+  });
 
   // 然后加载应用的 index.html。
   win.loadURL(`http://localhost:${SERVER_PORT}`);
