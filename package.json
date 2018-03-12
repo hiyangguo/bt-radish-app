@@ -1,14 +1,13 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "btSearch",
+  "version": "0.0.1",
+  "description": "A minimal BT search engine.",
   "main": "main.js",
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "start-dev": "PORT=3301 react-app-rewired start",
     "build-view": "react-app-rewired build",
-    "watch-css": "node node_modules/less-watch-compiler/dist/less-watch-compiler.js src/less src index.less",
-    "eject": "react-scripts eject"
+    "packager": "electron-packager ./"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,36 +16,37 @@
   "author": "Godfery.Yang<hiyangguo@qq.com>",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.17.1",
     "babel-eslint": "^8.2.1",
+    "cheerio": "^1.0.0-rc.2",
+    "classnames": "^2.2.5",
     "devtron": "^1.4.0",
+    "dom-lib": "^0.2.6",
     "electron": "^1.7.12",
+    "electron-devtools-installer": "^2.2.3",
     "eslint": "^4.17.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-react": "^7.6.1",
     "express": "^4.16.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0",
-    "util.promisify": "^1.0.0"
-  },
-  "dependencies": {
-    "axios": "^0.17.1",
-    "cheerio": "^1.0.0-rc.2",
-    "classnames": "^2.2.5",
-    "dom-lib": "^0.2.6",
-    "electron-devtools-installer": "^2.2.3",
     "less": "^3.0.0-alpha.3",
     "lodash": "^4.17.5",
     "mobx": "^3.5.1",
     "mobx-react": "^4.4.1",
     "prop-types": "^15.6.0",
+    "react": "^16.2.0",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewire-mobx": "^1.0.7",
     "react-app-rewired": "^1.4.1",
+    "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.0",
     "rsuite-clipboard": "^2.0.1",
     "rsuite-notification": "^3.0.0-next.2",
-    "tcp-port-used": "^0.1.2"
+    "tcp-port-used": "^0.1.2",
+    "util.promisify": "^1.0.0"
   },
-  "homepage": "./"
+  "homepage": "./",
+  "dependencies": {
+    "electron-packager": "^11.1.0"
+  }
 }

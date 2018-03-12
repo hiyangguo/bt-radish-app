@@ -1,7 +1,7 @@
 import path from 'path';
 import $ from 'cheerio';
 import _ from 'lodash';
-import evalScript from '../../utils/evalScript';
+import evalScript from '../utils/evalScript';
 
 /**
  * 解析文件相关的 html

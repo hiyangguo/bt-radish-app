@@ -27,7 +27,7 @@ function createWindow() {
   });
 
   // 加载应用
-  const staticIndexPath = path.join(`${__dirname}`, './build/index.html');
+  const staticIndexPath = path.join(`${__dirname}`, './index.html');
   const main = IS_DEV ? `http://localhost:${SERVER_PORT}` : url.format({
     pathname: staticIndexPath,
     protocol: 'file:',

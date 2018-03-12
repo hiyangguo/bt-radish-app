@@ -1,6 +1,5 @@
 import $ from 'cheerio';
 import _ from 'lodash';
-import evalScript from '../../utils/evalScript';
 
 
 /**
