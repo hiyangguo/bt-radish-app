@@ -27,7 +27,7 @@ function createWindow() {
   });
 
   // 加载应用
-  const staticIndexPath = path.join(`${__dirname}`, './index.html');
+  const staticIndexPath = path.join(`${__dirname}`, '../build/index.html');
   const main = IS_DEV ? `http://localhost:${SERVER_PORT}` : url.format({
     pathname: staticIndexPath,
     protocol: 'file:',
@@ -48,7 +48,7 @@ function createWindow() {
 
 function installExtensions() {
   devtron.install();
-  BrowserWindow.addDevToolsExtension(path.join(__dirname, 'chrome-extensions', 'react-dev-tools'));
+  BrowserWindow.addDevToolsExtension(path.join(__dirname, '../', 'chrome-extensions', 'react-dev-tools'));
 }
 
 // Electron 会在初始化后并准备
