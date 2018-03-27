@@ -1,7 +1,7 @@
 {
-  "name": "btSearch",
+  "name": "BTRadishApp",
   "version": "0.0.1",
-  "description": "A minimal BT search engine.",
+  "description": "A minimal BT search integration app , build with electron.",
   "main": "./public/electron.js",
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
