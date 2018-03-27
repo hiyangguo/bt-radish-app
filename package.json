@@ -14,7 +14,6 @@
     "babel-eslint": "^8.2.1",
     "cheerio": "^1.0.0-rc.2",
     "classnames": "^2.2.5",
-    "devtron": "^1.4.0",
     "dom-lib": "^0.2.6",
     "electron": "^1.6.10",
     "electron-builder": "^20.5.0",

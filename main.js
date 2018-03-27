@@ -1,5 +1,4 @@
 const {app, BrowserWindow} = require('electron');
-const devtron = require('devtron');
 const path = require('path');
 const url = require('url');
 
@@ -34,6 +33,17 @@ function createWindow() {
     slashes: true
   });
   win.loadURL(main);
+
+  win.webContents.executeJavaScript(`
+    var path = require('path');
+    module.paths.push(path.resolve('node_modules'));
+    module.paths.push(path.resolve('../node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron.asar', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app.asar', 'node_modules'));
+    path = undefined;
+  `);
   // 打开开发者工具。
   win.webContents.openDevTools();
 
@@ -47,7 +57,6 @@ function createWindow() {
 }
 
 function installExtensions() {
-  devtron.install();
   BrowserWindow.addDevToolsExtension(path.join(__dirname, './', 'chrome-extensions', 'react-dev-tools'));
 }
 
