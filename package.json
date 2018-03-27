@@ -2,7 +2,7 @@
   "name": "btSearch",
   "version": "0.0.1",
   "description": "A minimal BT search engine.",
-  "main": "./public/electron.js",
+  "main": "main.js",
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron"
@@ -65,7 +65,6 @@
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "start-dev": "PORT=3301 react-app-rewired start",
-    "build-view": "react-app-rewired build",
-    "packager": "rm -rf dist && electron-builder"
+    "build-view": "react-app-rewired build"
   }
 }
