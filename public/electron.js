@@ -26,7 +26,7 @@ function createWindow() {
   });
 
   // 加载应用
-  const staticIndexPath = path.join('file://', __dirname, './build/index.html');
+  const staticIndexPath = path.join(__dirname, './index.html');
   const main = IS_DEV ? `http://localhost:${SERVER_PORT}` : url.format({
     pathname: staticIndexPath,
     protocol: 'file:',
@@ -34,18 +34,8 @@ function createWindow() {
   });
   win.loadURL(main);
 
-  win.webContents.executeJavaScript(`
-    var path = require('path');
-    module.paths.push(path.resolve('node_modules'));
-    module.paths.push(path.resolve('../node_modules'));
-    module.paths.push(path.resolve(__dirname, '..', '..', 'electron', 'node_modules'));
-    module.paths.push(path.resolve(__dirname, '..', '..', 'electron.asar', 'node_modules'));
-    module.paths.push(path.resolve(__dirname, '..', '..', 'app', 'node_modules'));
-    module.paths.push(path.resolve(__dirname, '..', '..', 'app.asar', 'node_modules'));
-    path = undefined;
-  `);
   // 打开开发者工具。
-  win.webContents.openDevTools();
+  IS_DEV && win.webContents.openDevTools();
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
@@ -57,7 +47,7 @@ function createWindow() {
 }
 
 function installExtensions() {
-  BrowserWindow.addDevToolsExtension(path.join(__dirname, './', 'chrome-extensions', 'react-dev-tools'));
+  BrowserWindow.addDevToolsExtension(path.join(__dirname, '../', 'chrome-extensions', 'react-dev-tools'));
 }
 
 // Electron 会在初始化后并准备
