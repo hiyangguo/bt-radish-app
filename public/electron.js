@@ -50,7 +50,7 @@ function installExtensions() {
   BrowserWindow.addDevToolsExtension(path.join(__dirname, '../', 'chrome-extensions', 'react-dev-tools'));
 }
 
-// Electron 会在初始化后并准备
+// Electron 会在初始化后准备
 // 创建浏览器窗口时，调用这个函数。
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', async function () {

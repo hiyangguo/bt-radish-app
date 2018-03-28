@@ -56,9 +56,6 @@
     ],
     "directories": {
       "buildResources": "public"
-    },
-    "publish": {
-      "provider": "github"
     }
   },
   "scripts": {
